@@ -1,35 +1,360 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+  // Menghidupkan animasi saat website dibuka
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      duration: 800,
+      offset: 50,
+    });
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="antialiased selection:bg-primary selection:text-white font-sans text-gray-300">
+      
+      {/* Background Grid */}
+      <div className="bg-tech-grid"></div>
+
+      {/* Navbar (Menu Atas) */}
+      <nav className="fixed w-full z-50 top-0 bg-dark/80 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+          <a href="#" className="flex items-center gap-2 font-bold text-xl tracking-tight text-white group">
+            <span className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white text-sm group-hover:scale-110 transition-transform">BX</span>
+            <span>Xander<span className="text-gray-600 font-normal">Systems</span></span>
+          </a>
+          
+          <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+            <a href="#bento-profile" className="hover:text-white transition-colors">Profile</a>
+            <a href="#process" className="hover:text-white transition-colors">Workflow</a>
+            <a href="#projects" className="hover:text-white transition-colors">Works</a>
+            <a href="#insights" className="hover:text-white transition-colors">Insights</a>
+          </div>
+
+          <a href="#contact" className="px-6 py-2 bg-white text-black text-sm font-bold rounded-full hover:bg-primary hover:text-white transition-all">
+            Hire Me
+          </a>
+        </div>
+      </nav>
+
+      {/* 1. Hero Section (Judul Besar) */}
+      <section className="pt-40 pb-20 relative">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 tracking-tight leading-none" data-aos="zoom-in">
+            Architecting <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-primary to-gray-500">
+              Digital Empires.
+            </span>
+          </h1>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+            Saya Bil Xander. Menggabungkan strategi bisnis dengan eksekusi teknis presisi. Membantu bisnis bertransformasi melalui Web Apps, SaaS, dan AI.
+          </p>
+          <div className="flex flex-col md:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="300">
+            <a href="#projects" className="px-8 py-4 bg-white text-black font-bold rounded-2xl hover:scale-105 transition-transform">
+              Lihat Karya Saya
+            </a>
+            <a href="#bento-profile" className="px-8 py-4 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/5 transition-colors">
+              Tentang Bil Xander
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Teks Berjalan (Marquee) */}
+      <div className="py-6 border-y border-white/5 bg-white/5 backdrop-blur-sm mb-20 overflow-hidden">
+        <div className="marquee-container">
+          <div className="marquee-content text-4xl font-bold text-white/20 font-mono flex gap-12 select-none">
+            {/* Kita ulangi tulisan biar nyambung terus */}
+            {[...Array(2)].map((_, i) => (
+              <span key={i} className="flex gap-12">
+                <span>FULL STACK DEV</span> <span>•</span> <span>AI INTEGRATION</span> <span>•</span> <span>SAAS ARCHITECT</span> <span>•</span> <span>BUSINESS STRATEGY</span> <span>•</span>
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      {/* 3. Bento Grid Profile (Kotak-kotak Profil) */}
+      <section id="bento-profile" className="py-20 max-w-6xl mx-auto px-6">
+        <div className="mb-10 flex items-end justify-between">
+          <div>
+            <h2 className="text-3xl font-bold text-white">The Man Behind The System</h2>
+            <p className="text-gray-500 mt-2">Sebuah intip ke dalam dunia Bil Xander.</p>
+          </div>
+          <div className="hidden md:block text-right">
+            <p className="text-xs font-mono text-primary">LOCATION: INDONESIA</p>
+            <p className="text-xs font-mono text-gray-500">STATUS: ACTIVE</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-3 gap-5 h-auto md:h-[600px]">
+          {/* FOTO UTAMA */}
+          <div className="bento-card md:col-span-2 md:row-span-3 relative group" data-aos="fade-right">
+            <img 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop" 
+              alt="Bil Xander" 
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
+            />
+            <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black to-transparent">
+              <h3 className="text-white font-bold text-2xl">Bil Xander</h3>
+              <p className="text-gray-300 text-sm">Founder & Full Stack Dev</p>
+            </div>
+          </div>
+
+          {/* Bio Singkat */}
+          <div className="bento-card md:col-span-2 p-8 flex flex-col justify-center" data-aos="fade-down" data-aos-delay="100">
+            <i className="ri-double-quotes-l text-primary text-3xl mb-2"></i>
+            <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+              Visi saya sederhana: Menjadi triliuner bukan dengan keberuntungan, tapi dengan memecahkan masalah jutaan orang lewat teknologi. Xander Systems adalah kendaraan saya menuju sana.
+            </p>
+          </div>
+
+          {/* Foto Leadership */}
+          <div className="bento-card relative group overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+            <img 
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop" 
+              alt="Leadership" 
+              className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform" 
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-white font-bold bg-black/50 px-3 py-1 rounded backdrop-blur-sm border border-white/10">LEADERSHIP</span>
+            </div>
+          </div>
+
+          {/* Skill Teknis */}
+          <div className="bento-card p-6 flex flex-col justify-between bg-primary/10 border-primary/20" data-aos="fade-up" data-aos-delay="300">
+            <div className="flex flex-wrap gap-2">
+              <span className="text-xs bg-black/30 text-white px-2 py-1 rounded">Python</span>
+              <span className="text-xs bg-black/30 text-white px-2 py-1 rounded">NextJS</span>
+              <span className="text-xs bg-black/30 text-white px-2 py-1 rounded">AI</span>
+            </div>
+            <div>
+              <h4 className="text-white font-bold text-lg">Tech Core</h4>
+              <p className="text-xs text-gray-400">Main Weapons</p>
+            </div>
+          </div>
+
+          {/* Kontak Sosmed */}
+          <div className="bento-card md:col-span-2 p-6 flex items-center justify-between" data-aos="fade-up" data-aos-delay="400">
+            <div>
+              <h4 className="text-white font-bold text-lg">Connect Now</h4>
+              <p className="text-xs text-gray-500">Available for fast response</p>
+            </div>
+            <div className="flex gap-3">
+              <a href="https://wa.me/628123456789" className="w-10 h-10 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center hover:bg-green-500 hover:text-white transition-all"><i className="ri-whatsapp-line"></i></a>
+              <a href="https://tiktok.com/@bilxander" className="w-10 h-10 bg-pink-500/20 text-pink-500 rounded-full flex items-center justify-center hover:bg-pink-500 hover:text-white transition-all"><i className="ri-tiktok-fill"></i></a>
+              <a href="mailto:bil@xandersystems.com" className="w-10 h-10 bg-blue-500/20 text-blue-500 rounded-full flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all"><i className="ri-mail-line"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Workflow (Cara Kerja) */}
+      <section id="process" className="py-24 bg-cardbg border-y border-white/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">How I Work</h2>
+            <p className="text-gray-400">Metode sistematis untuk hasil yang terukur.</p>
+          </div>
+          <div className="grid md:grid-cols-4 gap-8 relative">
+            <div className="hidden md:block absolute top-8 left-0 w-full h-0.5 bg-white/10 z-0"></div>
+            
+            {/* Langkah-langkah */}
+            {[
+              { id: "01", title: "Discovery", desc: "Analisis kebutuhan bisnis.", color: "border-white/20" },
+              { id: "02", title: "Strategy", desc: "Perancangan arsitektur.", color: "border-white/20" },
+              { id: "03", title: "Develop", desc: "Coding & Integrasi AI.", color: "border-primary text-primary shadow-[0_0_20px_rgba(139,92,246,0.3)]" },
+              { id: "04", title: "Launch", desc: "Deploy & Maintenance.", color: "border-white/20" }
+            ].map((step, idx) => (
+              <div key={idx} className="relative z-10" data-aos="fade-up" data-aos-delay={idx * 100}>
+                <div className={`w-16 h-16 bg-cardbg border ${step.color} rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 mx-auto`}>
+                  {step.id}
+                </div>
+                <h3 className="text-white font-bold text-center mb-2">{step.title}</h3>
+                <p className="text-xs text-center text-gray-500">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Services (Layanan) */}
+      <section className="py-24">
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-12">
+          <div className="md:col-span-4 relative">
+            <div className="sticky top-32">
+              <span className="text-primary font-mono text-xs tracking-widest uppercase mb-4 block">/// SERVICES</span>
+              <h2 className="text-4xl font-bold text-white mb-6">High-End Solutions.</h2>
+              <p className="text-gray-400 mb-8 text-sm leading-relaxed">
+                Layanan yang saya tawarkan bersifat *custom-made*. Tidak ada template. Semua dibangun untuk skalabilitas.
+              </p>
+              <a href="#contact" className="text-white border-b border-white pb-1 hover:text-primary hover:border-primary transition-all text-sm font-bold">Start a Project -&gt;</a>
+            </div>
+          </div>
+          <div className="md:col-span-8 space-y-6">
+            {[
+              { icon: "ri-layout-grid-line", title: "SaaS Development", desc: "Pengembangan platform Software as a Service dari nol dengan Supabase." },
+              { icon: "ri-robot-2-line", title: "AI Integration", desc: "Mengintegrasikan model AI untuk otomatisasi dan analisis bisnis." },
+              { icon: "ri-code-s-slash-line", title: "Custom Web Apps", desc: "Dashboard admin, sistem inventaris, dan aplikasi internal korporat." }
+            ].map((service, idx) => (
+              <div key={idx} className="bento-card p-8 flex gap-6 items-start" data-aos="fade-left" data-aos-delay={idx * 100}>
+                <div className="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-2xl text-white shrink-0">
+                  <i className={service.icon}></i>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
+                  <p className="text-sm text-gray-400">{service.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Projects (Portofolio) */}
+      <section id="projects" className="py-24 bg-cardbg border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-white mb-16 text-center">Featured Systems</h2>
+          
+          {/* Project 1: Cuan-in */}
+          <div className="mb-20 grid md:grid-cols-2 gap-10 items-center group">
+            <div className="order-2 md:order-1">
+              <div className="flex gap-2 mb-4">
+                <span className="px-2 py-1 bg-white/10 rounded text-[10px] font-mono text-primary border border-primary/20">POS SYSTEM</span>
+              </div>
+              <h3 className="text-3xl font-bold text-white mb-4">Cuan-in POS</h3>
+              <p className="text-gray-400 leading-relaxed mb-6">
+                Sistem Point of Sales revolusioner untuk industri F&B. Membantu pemilik bisnis memantau ribuan transaksi secara real-time.
+              </p>
+              <a href="#" className="px-6 py-3 bg-white text-black font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Case Study</a>
+            </div>
+            <div className="order-1 md:order-2 bento-card h-80 relative">
+              <img 
+                src="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000&auto=format&fit=crop" 
+                alt="POS System" 
+                className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" 
+              />
+            </div>
+          </div>
+
+          {/* Project 2: 1% Lebih Baik */}
+          <div className="grid md:grid-cols-2 gap-10 items-center group">
+            <div className="bento-card h-80 relative">
+              <img 
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop" 
+                alt="Edutech" 
+                className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" 
+              />
+            </div>
+            <div>
+              <div className="flex gap-2 mb-4">
+                <span className="px-2 py-1 bg-white/10 rounded text-[10px] font-mono text-primary border border-primary/20">EDUTECH</span>
+              </div>
+              <h3 className="text-3xl font-bold text-white mb-4">1% Lebih Baik</h3>
+              <p className="text-gray-400 leading-relaxed mb-6">
+                Platform pengembangan diri digital dengan algoritma pemetaan karir untuk Gen-Z.
+              </p>
+              <a href="#" className="px-6 py-3 bg-white text-black font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Case Study</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Insights (Artikel) */}
+      <section id="insights" className="py-24 bg-cardbg border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <span className="text-primary font-mono text-xs tracking-widest uppercase mb-2 block">/// ENGINEERING LOGS</span>
+              <h2 className="text-3xl font-bold text-white">Insights & Thoughts</h2>
+            </div>
+            <a href="#" className="hidden md:inline-block text-sm text-gray-500 hover:text-white transition-colors">View All Archive -&gt;</a>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { 
+                tag: "VISION", date: "JAN 29, 2026", title: "The Trillionaire Mindset: Tech as Leverage", 
+                desc: "Membangun kekayaan bukan tentang uang, tapi tentang seberapa besar masalah yang bisa kita selesaikan.",
+                img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop"
+              },
+              { 
+                tag: "LEADERSHIP", date: "DEC 15, 2025", title: "From Karang Taruna to Tech CEO", 
+                desc: "Pelajaran kepemimpinan dari lapangan yang saya terapkan dalam mengelola tim developer.",
+                img: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1000&auto=format&fit=crop"
+              },
+              { 
+                tag: "TECH", date: "NOV 02, 2025", title: "Scaling SaaS with Supabase", 
+                desc: "Deep dive teknis: Menangani ribuan transaksi real-time di Cuan-in tanpa mengorbankan performa server.",
+                img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop"
+              }
+            ].map((article, idx) => (
+              <div key={idx} className="article-card group cursor-pointer" data-aos="fade-up" data-aos-delay={idx * 100}>
+                {/* Image Container */}
+                <div className="h-48 overflow-hidden relative">
+                  <img 
+                    src={article.img} 
+                    alt={article.title} 
+                    className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-2 py-1 bg-black/70 backdrop-blur rounded text-[10px] font-mono text-white border border-white/10">{article.tag}</span>
+                  </div>
+                </div>
+                {/* Content */}
+                <div className="p-6">
+                  <span className="text-[10px] font-mono text-gray-500 mb-2 block">{article.date}</span>
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">{article.title}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed mb-6 line-clamp-3">
+                    {article.desc}
+                  </p>
+                  <div className="flex items-center gap-2 text-sm font-bold text-white">
+                    Read Article <i className="ri-arrow-right-line read-arrow transition-transform"></i>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Footer (Kontak) */}
+      <footer id="contact" className="bg-[#020202] pt-24 pb-12 border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 mb-20">
+            <div>
+              <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tighter">Let's <br /> Build.</h2>
+              <p className="text-gray-400 text-lg max-w-sm mb-8">Punya ide atau masalah bisnis? Mari kita ubah menjadi sistem yang bekerja.</p>
+              <div className="flex gap-4">
+                <a href="https://tiktok.com/@bilxander" className="w-12 h-12 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"><i className="ri-tiktok-fill text-xl"></i></a>
+                <a href="#" className="w-12 h-12 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"><i class="ri-instagram-line text-xl"></i></a>
+                <a href="#" className="w-12 h-12 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"><i class="ri-linkedin-fill text-xl"></i></a>
+              </div>
+            </div>
+            <div className="bg-cardbg border border-white/5 p-8 rounded-3xl">
+              <h3 className="text-white font-bold text-xl mb-6">Contact Channels</h3>
+              <div className="space-y-4">
+                <a href="https://wa.me/628123456789" className="block bg-green-900/10 border border-green-500/20 p-4 rounded-xl hover:bg-green-500 hover:text-white transition-all group">
+                  <div className="flex justify-between items-center"><span className="text-green-500 font-bold group-hover:text-white">WhatsApp</span><i className="ri-whatsapp-line text-green-500 group-hover:text-white text-xl"></i></div>
+                  <p className="text-xs text-gray-500 mt-1 group-hover:text-white/80">Fast Response</p>
+                </a>
+                <a href="mailto:bil@xandersystems.com" className="block bg-white/5 border border-white/10 p-4 rounded-xl hover:bg-white hover:text-black transition-all group">
+                  <div className="flex justify-between items-center"><span className="text-white font-bold group-hover:text-black">Email</span><i className="ri-mail-line text-white group-hover:text-black text-xl"></i></div>
+                  <p class="text-xs text-gray-500 mt-1 group-hover:text-black/60">Business Inquiry</p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="text-center border-t border-white/5 pt-8">
+            <p className="text-gray-600 text-sm font-mono">&copy; 2026 Xander Systems. All Rights Reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
